@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidCoolMouth</string>
+    <string name="action_settings">Settings</string>
+    <string name="test_button_text">押してみろ、たわけ！</string>
+</resources>
