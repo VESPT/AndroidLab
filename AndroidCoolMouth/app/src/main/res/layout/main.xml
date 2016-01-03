@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#33000000"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
     <TextView
         android:id="@+id/text"
         android:layout_width="fill_parent"
@@ -12,10 +13,12 @@
         android:text="WidgetSample"
         android:textColor="#ffffffff"
         />
-    <Button
-        android:id="@+id/button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Push!"
-        />
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:id="@+id/vgun_imageButton"
+        android:layout_weight="0.12"
+        android:src="@drawable/g_lm312v04" />/>
+
 </LinearLayout>

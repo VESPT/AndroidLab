@@ -55,7 +55,7 @@ public class MyWidget extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getService(context, appWidgetId, buttonIntent, 0); //Serviceへインテントを投げる設定
             Log.d(TAG, "pendingIntent準備完了");
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.main);
-            remoteViews.setOnClickPendingIntent(R.id.button, pendingIntent); // WidgetButtonをIntent発行者とする、これで押した時に発行される
+            remoteViews.setOnClickPendingIntent(R.id.vgun_imageButton, pendingIntent); // WidgetButtonをIntent発行者とする、これで押した時に発行される
             Log.d(TAG, "remoteview(Widgetボタン)へセット完了、これでボタン押した時にIntent発行");
             remoteViews.setTextViewText(R.id.text, "Push test" + appWidgetId);
 

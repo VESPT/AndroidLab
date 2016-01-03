@@ -11,20 +11,30 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer; // 音声用
 import android.widget.Button;
 import java.io.IOException;
 import android.media.SoundPool; // 効果音用
+import java.util.Timer;
+import java.util.TimerTask;
+import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "MainActivity"; // デバッグ用
+
+    // タイマー
+    TextView text1;
+    Button button1;
+    Timer timer = null;
+    Handler handle = new Handler();
 
     // 音声再生ボタン
     MediaPlayer mp = null;
     Button play_button;
 
-    //効果音用
+    // 効果音用
     SoundPool sp;
     int sound_id;
 
@@ -54,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 効果音用
         sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         sound_id = sp.load(this, R.raw.se_maoudamashii_system46, 1 );
+
+        // テキストヴュー
+        text1 = (TextView) findViewById(R.id.TimerButton);
     }
 
     @Override
@@ -84,30 +97,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View v) {
-        /*
-        if (mp.isPlaying()) { //連続押下
-            play_button.setText("Music Start");
-            mp.stop(); // 停止する
-            try {
-                mp.prepare();
-                mp.start(); // すぐ再生
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else { //停止中の時に押されたら再生する
-            play_button.setText("Music Stop");
-            mp.start();
-        }
-        */
-
         // アイコン選択Activiti召喚
         Intent icon_intent = new Intent(this, ReceiveIntent.class);
         icon_intent.putExtra("org.jpn.techbooster.demo.intent.testString", "!TEST STRING!");
         startActivity(icon_intent);
 
         sp.play(sound_id, 1.0F, 1.0F, 0, 0, 1.0F);
+    }
+
+    public void TimerOnClickMethod(View v){
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = null;
+        text1.setText("タイマーセット");
+        timer = new Timer();
+        timer.schedule(new MyTimer(), 1000); // ミリ秒でセット
+    }
+
+    class MyTimer extends TimerTask {
+        @Override
+        public void run() { // ここのRunはTimerスレッドが行うRun
+            handle.post(new Runnable() {
+                @Override
+                public void run() { // ここのRunはUIスレッドが行うRun
+                    text1.setText("1秒経過");
+                }
+            });
+        }
     }
 }

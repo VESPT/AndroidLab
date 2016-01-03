@@ -15,7 +15,7 @@ import android.widget.RemoteViews;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
-public class BaseWidget extends AppWidgetProvider {
+public abstract class BaseWidget extends AppWidgetProvider {
     private final String TAG = "BaseWidget";
 
 
@@ -23,7 +23,6 @@ public class BaseWidget extends AppWidgetProvider {
     public void onEnabled(Context context) {
         Log.d(TAG, "onEnabled");
         super.onEnabled(context);
-
     }
 
     @Override
@@ -54,11 +53,11 @@ public class BaseWidget extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getService(context, appWidgetId, buttonIntent, 0); //Serviceへインテントを投げる設定
             Log.d(TAG, "pendingIntent準備完了");
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.main);
-            remoteViews.setOnClickPendingIntent(R.id.button, pendingIntent); // WidgetButtonをIntent発行者とする、これで押した時に発行される
+            remoteViews.setOnClickPendingIntent(R.id.vgun_imageButton, pendingIntent); // WidgetButtonをIntent発行者とする、これで押した時に発行される
             Log.d(TAG, "remoteview(Widgetボタン)へセット完了、これでボタン押した時にIntent発行");
             remoteViews.setTextViewText(R.id.text, "Push test" + appWidgetId);
 
-            ComponentName thisWidget = new ComponentName(context, MyWidget.class);
+            //ComponentName thisWidget = new ComponentName(context, MyWidget.class);
             //AppWidgetManager manager = AppWidgetManager.getInstance(context);
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
@@ -72,8 +71,8 @@ public class BaseWidget extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         Log.d(TAG, "onDeleted");
         super.onDeleted(context, appWidgetIds);
-        Intent intent = new Intent(context, ServiceSample.class);
-        context.stopService(intent);
+        //Intent intent = new Intent(context, ServiceSample.class);
+        //context.stopService(intent);
     }
 
     @Override
