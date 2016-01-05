@@ -31,7 +31,7 @@
                 />
         </receiver>
         <receiver
-            android:name="WV_house1"
+            android:name=".Widgets.WV_house1"
             android:label="WV_house1">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -42,7 +42,7 @@
                 />
         </receiver>
         <receiver
-            android:name="WV_house2"
+            android:name=".Widgets.WV_house2"
             android:label="WV_house2">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

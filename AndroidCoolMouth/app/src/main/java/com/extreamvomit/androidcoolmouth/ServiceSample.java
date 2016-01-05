@@ -3,12 +3,8 @@ package com.extreamvomit.androidcoolmouth;
 /**
  * Created by vesp on 15/12/07.
  */
-
-
-        import android.app.PendingIntent;
         import android.app.Service;
         import android.appwidget.AppWidgetManager;
-        import android.content.ComponentName;
         import android.content.Intent;
         import android.media.AudioManager;
         import android.media.SoundPool;
@@ -18,13 +14,11 @@ package com.extreamvomit.androidcoolmouth;
         import android.widget.Button;
         import android.widget.RemoteViews;
         import android.widget.TextView;
-
-        import java.io.FileInputStream;
-        import java.io.ObjectOutputStream;
-        import java.io.FileOutputStream;
-        import java.io.Serializable;
+        import com.extreamvomit.androidcoolmouth.WidgetDatas.WidgetIDNum;
+        import com.extreamvomit.androidcoolmouth.WidgetEditors.SetInitButton;
         import java.util.Timer;
         import java.util.TimerTask;
+        import static com.extreamvomit.androidcoolmouth.TypeDefine.ON_CLICK;
 
 public class ServiceSample extends Service {
     private final String BUTTON_CLICK_ACTION = "BUTTON_CLICK_ACTION";
@@ -35,59 +29,68 @@ public class ServiceSample extends Service {
     int sound_id;
 
     // タイマー
+    /*
     TextView text1;
     Button button1;
     Timer timer = null;
     Handler handle = new Handler();
-
-    // Remote
-    RemoteViews remoteViews;
-
-    // Widget
-    int appWidgetId = -1;
+    */
 
     @Override
     public void onCreate() {
         // 効果音用
         sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-        sound_id = sp.load(getApplicationContext(), R.raw.se_maoudamashii_system46, 1 );
+        sound_id = sp.load(getApplicationContext(), R.raw.se_maoudamashii_system46, 1 ); // デフォルト
     }
 
     @Override
     public void onStart(Intent intent, int startId) {
         Log.d(TAG, "onStart");
         super.onStart(intent, startId);
+        // Remote
+        RemoteViews remoteViews;
+        // Widget
+        //int appWidgetId = -1;
 
         Log.d(TAG, "ServiceへIntentやって来ました");
         remoteViews = new RemoteViews(getPackageName(), R.layout.main);
         // ボタンが押された時に発行されたインテントの場合は文字を変更する
         if (BUTTON_CLICK_ACTION.equals(intent.getAction())) {
             Log.d(TAG, "BUTTON_CLICK_ACTION");
-            appWidgetId = intent.getIntExtra( AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-            Log.d(TAG, "WidgetID is " + appWidgetId);
-            remoteViews.setTextViewText(R.id.text, "Push Button" + appWidgetId);
-            sp.play(sound_id, 1.0F, 1.0F, 0, 0, 1.0F);
-
-            // 画像切り替え
-            remoteViews.setImageViewResource(R.id.vgun_imageButton, R.drawable.g_fa010s);
+            // WidgetIDとタイプを取得
+            //WidgetIDNum wNum = (WidgetIDNum)intent.getSerializableExtra("WidgetData");
+            //Log.d(TAG, "WidgetID is " + wNum.getWidgetID());
+            //sp.play(sound_id, 1.0F, 1.0F, 0, 0, 1.0F);
 
             // Timer起動
+            /*
             if (timer != null) {
                 timer.cancel();
+                ここに画像戻す処理を入れる
             }
             timer = null;
             timer = new Timer();
             timer.schedule(new MyTimer(), 1000); // ミリ秒でセット
+            */
+
+            // WidgetButton動作開始
+            SetInitButton setInitButton = new SetInitButton();
+            setInitButton.ExeFollowingType(getApplicationContext(), intent, remoteViews, ON_CLICK);
+
+
 
             // AppWidgetの画面更新
-            Log.d(TAG, "appWidgetManager起動");
+            // Log.d(TAG, "appWidgetManager起動");
             //ComponentName thisWidget = new ComponentName(this, MyWidget.class);
+            /*
             AppWidgetManager manager = AppWidgetManager.getInstance(this);
-            manager.updateAppWidget(appWidgetId, remoteViews);
-            Log.d(TAG, "updateAppwidget終了");
+            manager.updateAppWidget(wNum.getWidgetID(), remoteViews);
+            */
+           //  Log.d(TAG, "updateAppwidget終了");
 
             // シリアライズ
-            WidgetNum data = new WidgetNum();
+            /*
+            WidgetIDNum data = new WidgetIDNum();
             data.setString("TEST");
             data.setNumber(appWidgetId);
             try {
@@ -98,6 +101,7 @@ public class ServiceSample extends Service {
             } catch (Exception e) {
                 Log.d(TAG, "Error");
             }
+            */
         }
     }
 
@@ -105,24 +109,5 @@ public class ServiceSample extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    class MyTimer extends TimerTask {
-        @Override
-        public void run() { // ここのRunはTimerスレッドが行うRun
-            Log.d(TAG, "TimerRun");
-            if(appWidgetId == -1) return; // appWidgetに正しい値が入っていなかったら実行しない
-            handle.post(new Runnable() {
-                @Override
-                public void run() { // ここのRunはUIスレッドが行うRun
-                    Log.d(TAG, "TimerRunDo");
-                    remoteViews.setTextViewText(R.id.text, "1秒経過");
-                    // 画像切り替え
-                    remoteViews.setImageViewResource(R.id.vgun_imageButton, R.drawable.g_msz006);
-                    AppWidgetManager manager = AppWidgetManager.getInstance(getApplicationContext());
-                    manager.updateAppWidget(appWidgetId, remoteViews);
-                }
-            });
-        }
     }
 }

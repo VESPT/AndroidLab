@@ -7,15 +7,16 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.extreamvomit.androidcoolmouth.WidgetDatas.WidgetIDNum;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
-
+// このクラスは使わない（消去予定）
 public class MyWidget extends AppWidgetProvider {
     private final String TAG = "Test_WidgetSample";
 
@@ -34,17 +35,19 @@ public class MyWidget extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
         // デシリアライズ
+        /*
         try {
             FileInputStream fis = context.openFileInput("WidgetSaveData.dat"); // contextが必要
             ObjectInputStream ois = new ObjectInputStream(fis);
-            WidgetNum data = (WidgetNum) ois.readObject();
+            WidgetIDNum data = (WidgetIDNum) ois.readObject();
             ois.close();
 
-            Log.d(TAG, data.getString());
-            Log.d(TAG, ""+data.getNumber());
+            //Log.d(TAG, data.getString());
+            //Log.d(TAG, ""+data.getNumber());
         } catch (Exception e) {
             Log.d(TAG, "Error");
         }
+        */
 
         for (int appWidgetId : appWidgetIds) {
             Log.d(TAG, "appWidgetId:" + appWidgetId);
@@ -55,12 +58,10 @@ public class MyWidget extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getService(context, appWidgetId, buttonIntent, 0); //Serviceへインテントを投げる設定
             Log.d(TAG, "pendingIntent準備完了");
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.main);
+            //SetIntentData(remoteViews);
             remoteViews.setOnClickPendingIntent(R.id.vgun_imageButton, pendingIntent); // WidgetButtonをIntent発行者とする、これで押した時に発行される
             Log.d(TAG, "remoteview(Widgetボタン)へセット完了、これでボタン押した時にIntent発行");
             remoteViews.setTextViewText(R.id.text, "Push test" + appWidgetId);
-
-            ComponentName thisWidget = new ComponentName(context, MyWidget.class);
-            //AppWidgetManager manager = AppWidgetManager.getInstance(context);
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
 
