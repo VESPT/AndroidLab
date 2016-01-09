@@ -7,11 +7,13 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.extreamvomit.androidcoolmouth.R;
-import com.extreamvomit.androidcoolmouth.ServiceSample;
+import com.extreamvomit.androidcoolmouth.WidgetService;
 import com.extreamvomit.androidcoolmouth.WidgetDatas.WidgetIDNum;
 import com.extreamvomit.androidcoolmouth.WidgetEditors.SetInitButton;
 
@@ -48,18 +50,18 @@ public abstract class BaseWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             Log.d(TAG, "appWidgetId:" + appWidgetId);
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.main);
-            SetInitButton wInfo = new SetInitButton();
+            SetInitButton setInitButton = new SetInitButton(context);
             // ボタンIntentの設定
-            //WidgetIDNum wNum = new WidgetIDNum(); // これ入れないとERRORになるかも
-            WidgetIDNum wNum = InitType(appWidgetId); // wNumの値をセット（抽象クラスで処理内容が変わる）
-            wInfo.SetButtonIntent(context, remoteViews, wNum);
+            WidgetIDNum wNum = this.InitType(appWidgetId); // wNumの値をセット（抽象クラスで処理内容が変わる） インスタンスは内部で生成
+            setInitButton.SetButtonIntent(remoteViews, wNum); // これ以降、ボタンを押すとIntentをserviceへと送るようになる
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews); // Widgetを更新(RemoteViewを反映)
+
             // Delete処理
             // 今は入れてない
         }
 
         // サービスの起動
-        Intent intent = new Intent(context, ServiceSample.class);
+        Intent intent = new Intent(context, WidgetService.class);
         context.startService(intent);
     }
 
@@ -67,7 +69,7 @@ public abstract class BaseWidget extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         Log.d(TAG, "onDeleted");
         super.onDeleted(context, appWidgetIds);
-        //Intent intent = new Intent(context, ServiceSample.class); // これ入れるとバグる
+        //Intent intent = new Intent(context, WidgetService.class); // これ入れるとバグる
         //context.stopService(intent);
     }
 

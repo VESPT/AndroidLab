@@ -15,7 +15,7 @@ public class ReceiveIntent extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "Intentもらうで");
+        //Log.d(TAG, "Intentもらうで");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resource_view);
 
@@ -26,7 +26,7 @@ public class ReceiveIntent extends Activity {
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
         }
         else{
-            Log.d(TAG, "Intentもろうた");
+         //   Log.d(TAG, "Intentもろうた");
         }
     }
 

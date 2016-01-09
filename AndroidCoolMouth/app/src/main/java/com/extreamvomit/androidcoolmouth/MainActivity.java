@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Handler handle = new Handler();
 
     // 音声再生ボタン
-    MediaPlayer mp = null;
+    //MediaPlayer mp = null;
     Button play_button;
 
     // 効果音用
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "Intentもらうで");
+        //Log.d(TAG, "Intentもらうで");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -56,14 +56,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        /*
         // 音声再生用
         mp = MediaPlayer.create(this, R.raw.hit01);
         play_button = (Button) findViewById(R.id.PlayButton);
         play_button.setOnClickListener(this);
-
+*/
         // 効果音用
         sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         sound_id = sp.load(this, R.raw.se_maoudamashii_system46, 1 );
+
 
         // テキストヴュー
         text1 = (TextView) findViewById(R.id.TimerButton);
@@ -102,7 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         icon_intent.putExtra("org.jpn.techbooster.demo.intent.testString", "!TEST STRING!");
         startActivity(icon_intent);
 
+
+        Log.d("SetWidgetSound", "Activity　Sound_id = " + sound_id);
         sp.play(sound_id, 1.0F, 1.0F, 0, 0, 1.0F);
+
     }
 
     public void TimerOnClickMethod(View v){

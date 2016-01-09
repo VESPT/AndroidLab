@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.extreamvomit.androidcoolmouth.R;
 import com.extreamvomit.androidcoolmouth.WidgetDatas.WidgetData;
 
 import java.util.Timer;
@@ -19,27 +18,32 @@ import static com.extreamvomit.androidcoolmouth.TypeDefine.NORMAL;
  */
 public class SetWidgetTimer{
     private final String TAG = "TimerWidget";
-    Context tContext;
-    RemoteViews tRemoteViews;
-    WidgetData tWidgetData;
-    Timer timer = null;
+    static Context context;
+    static RemoteViews tRemoteViews;
+    static WidgetData tWidgetData;
+    static Timer timer = null;
+
+    public SetWidgetTimer(Context f_context){
+        context = f_context; // runするときにつかう
+    }
 
     // Timer起動
-    void StartWidgetTimer(Context context, RemoteViews remoteViews, WidgetData wData){
-        tContext = context;
+    public void StartWidgetTimer(RemoteViews remoteViews, WidgetData wData){
+        // ここにOldとか作らないかん
+        //context = f_context; // runするときにつかう
         tRemoteViews = remoteViews;
         tWidgetData = wData;
 
         if (timer != null) {
             timer.cancel();
-            SetWidgetImage.SetImageToRV(context, remoteViews, wData.GetImageData(), NORMAL); // 画像をリモートビューにセット
+            SetWidgetImage.SetImageToRV(remoteViews, wData.GetImageData(), NORMAL); // 画像をリモートビューにセット
         }
         timer = null;
         timer = new Timer();
         timer.schedule(new WidgetTimer(), 1000); // ミリ秒でセット
     }
 
-    class WidgetTimer extends TimerTask {
+    private class WidgetTimer extends TimerTask {
         Handler handle = new Handler();
         @Override
         public void run() { // ここのRunはTimerスレッドが行うRun
@@ -51,8 +55,8 @@ public class SetWidgetTimer{
                     Log.d(TAG, "TimerRunDo");
                     //remoteViews.setTextViewText(R.id.text, "1秒経過");
                     // 画像切り替え
-                    SetWidgetImage.SetImageToRV(tContext, tRemoteViews, tWidgetData.GetImageData(), NORMAL); // 画像をリモートビューにセット
-                    AppWidgetManager manager = AppWidgetManager.getInstance(tContext);
+                    SetWidgetImage.SetImageToRV(tRemoteViews, tWidgetData.GetImageData(), NORMAL); // 画像をリモートビューにセット
+                    AppWidgetManager manager = AppWidgetManager.getInstance(context);
                     manager.updateAppWidget(tWidgetData.getWidgetNumID().getWidgetID(), tRemoteViews);
                 }
             });

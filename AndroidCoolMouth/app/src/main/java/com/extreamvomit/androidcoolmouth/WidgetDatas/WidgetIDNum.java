@@ -9,16 +9,19 @@ import java.io.Serializable;
  * Widgetの初期化で用いる
  */
 public class WidgetIDNum implements Serializable {
-    private static final long serialVersionUID = 1L; //シリアルバージョンID
+    private static final long serialVersionUID = 3L; //シリアルバージョンID
 
     private int appWidgetId = -1;
     private int type_number;
 
     // コンストラクタ
+    public WidgetIDNum(){
+    }
     public WidgetIDNum(int widgetId, int number){
         setWidgetID(widgetId);
         setTypeNumber(number);
     }
+
     // ゲッターセッター
     public int getWidgetID() {
         return appWidgetId;
