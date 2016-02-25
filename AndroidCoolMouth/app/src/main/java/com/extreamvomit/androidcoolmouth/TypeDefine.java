@@ -22,6 +22,9 @@ public class TypeDefine {
     public static final int TYPE_12 = 12;
     public static final int TYPE_13 = 13;
 
+    // WidgetTypeArray
+    public static final int SOUND_ARRAY_NUM= 2;
+
     // WidgetState（通常時か、クリック時なのか）
     public static final int NORMAL = 0;
     public static final int ON_CLICK = 1;

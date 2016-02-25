@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton1"
+            android:background="@drawable/toggle_button1"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="0"
+            android:checked="false"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton2"
+            android:background="@drawable/toggle_button2"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="1"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton3"
+            android:background="@drawable/toggle_button3"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton4"
+            android:background="@drawable/toggle_button4"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton5"
+            android:background="@drawable/toggle_button5"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="0"
+            android:checked="false"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton6"
+            android:background="@drawable/toggle_button6"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="1"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton7"
+            android:background="@drawable/toggle_button7"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton8"
+            android:background="@drawable/toggle_button8"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton9"
+            android:background="@drawable/toggle_button9"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="0"
+            android:checked="false"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton10"
+            android:background="@drawable/toggle_button10"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="1"
+            android:layout_margin="10dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+</TableLayout>

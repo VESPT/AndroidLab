@@ -1,5 +1,6 @@
 package com.extreamvomit.androidcoolmouth;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -20,16 +21,11 @@ import android.media.SoundPool; // 効果音用
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
+import static com.extreamvomit.androidcoolmouth.WidgetTypeNum.WTNUM1;
+import static com.extreamvomit.androidcoolmouth.TypeDefine.TYPE_02;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "MainActivity"; // デバッグ用
-
-    // タイマー
-    TextView text1;
-    Button button1;
-    Timer timer = null;
-    Handler handle = new Handler();
-
     // 音声再生ボタン
     //MediaPlayer mp = null;
     Button play_button;
@@ -40,13 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Log.d(TAG, "Intentもらうで");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
+        */
 
         /*
         // 音声再生用
@@ -65,10 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 効果音用
         sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         sound_id = sp.load(this, R.raw.se_maoudamashii_system46, 1 );
-
-
-        // テキストヴュー
-        text1 = (TextView) findViewById(R.id.TimerButton);
     }
 
     @Override
@@ -93,42 +86,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    /*
     public void MyOnClickMethod(View v){
         Toast.makeText(this, "(´・ω・｀)", Toast.LENGTH_SHORT).show();
+        WTNUM1 = TYPE_02;
+
+        // サービスの停止
+        Context app_context = getApplicationContext();
+        Intent service_intent = new Intent(app_context, WidgetService.class);
+        app_context.stopService(service_intent);
+
+        // Activity終了
         finish();
     }
 
+    */
     public void onClick(View v) {
         // アイコン選択Activiti召喚
         Intent icon_intent = new Intent(this, ReceiveIntent.class);
         icon_intent.putExtra("org.jpn.techbooster.demo.intent.testString", "!TEST STRING!");
-        startActivity(icon_intent);
+        //startActivity(icon_intent);
 
+        WTNUM1 = TYPE_02;
 
         Log.d("SetWidgetSound", "Activity　Sound_id = " + sound_id);
         sp.play(sound_id, 1.0F, 1.0F, 0, 0, 1.0F);
 
     }
 
-    public void TimerOnClickMethod(View v){
-        if (timer != null) {
-            timer.cancel();
-        }
-        timer = null;
-        text1.setText("タイマーセット");
-        timer = new Timer();
-        timer.schedule(new MyTimer(), 1000); // ミリ秒でセット
-    }
-
-    class MyTimer extends TimerTask {
-        @Override
-        public void run() { // ここのRunはTimerスレッドが行うRun
-            handle.post(new Runnable() {
-                @Override
-                public void run() { // ここのRunはUIスレッドが行うRun
-                    text1.setText("1秒経過");
-                }
-            });
-        }
-    }
 }

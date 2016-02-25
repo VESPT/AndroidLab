@@ -13,15 +13,22 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".RVEditors.SelectWidget"
+            android:process=":SoundStampSelectActivity">
         </activity>
         <receiver
-            android:name=".Widgets.WV_house1"
-            android:label="WV_house1">
+            android:name=".Widgets.A_Voistamp1"
+            android:label="A_Voistamp1"
+            android:process=":SoundStamp">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -31,8 +38,8 @@
                 />
         </receiver>
         <receiver
-            android:name=".Widgets.WV_house2"
-            android:label="WV_house2">
+            android:name=".Widgets.A_Voistamp2"
+            android:label="A_Voistamp2">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -41,7 +48,9 @@
                 android:resource="@xml/widgetsample"
                 />
         </receiver>
-        <service android:name=".WidgetService">
+        <service
+            android:name=".WidgetService"
+            android:process=":SoundStamp">
             <intent-filter>
                 <action android:name="BUTTON_CLICK_ACTION" />
             </intent-filter>

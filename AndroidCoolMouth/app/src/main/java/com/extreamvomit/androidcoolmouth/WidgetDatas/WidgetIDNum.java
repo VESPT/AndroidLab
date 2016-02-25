@@ -6,33 +6,33 @@ import java.io.Serializable;
  * Created by vesp on 15/12/23.
  * Widgetの番号とIDを格納しているクラス
  * Intentに使うため、シリアライズ化している
- * Widgetの初期化で用いる
  */
 public class WidgetIDNum implements Serializable {
     private static final long serialVersionUID = 3L; //シリアルバージョンID
 
     private int appWidgetId = -1;
     private int type_number;
+    private int init_flag;
 
     // コンストラクタ
-    public WidgetIDNum(){
-    }
     public WidgetIDNum(int widgetId, int number){
-        setWidgetID(widgetId);
-        setTypeNumber(number);
+        SetWidgetID(widgetId);
+        SetTypeNumber(number);
+        init_flag=1;
     }
 
     // ゲッターセッター
-    public int getWidgetID() {
+    public int GetWidgetID() {
         return appWidgetId;
     }
-    public void setWidgetID(int widgetId) {
+    public void SetWidgetID(int widgetId) {
         appWidgetId = widgetId;
     }
-    public int getTypeNumber() {
+    public int GetTypeNumber() {
         return type_number;
     }
-    public void setTypeNumber(int number) {
+    public void SetTypeNumber(int number) {
         type_number = number;
     }
+    public void RiseInitFlag(){init_flag=1;}
 }

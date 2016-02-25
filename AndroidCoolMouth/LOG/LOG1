@@ -1,0 +1,3 @@
+0 14:19:45.381 2410-3317/? E/DatabaseUtils: Writing exception to parcel
+01-30 14:19:45.381 2410-3317/? E/DatabaseUtils: java.lang.SecurityException: Permission Denial: get/set setting for user asks to run as user -2 but is calling from user 0; this requires android.permission.INTERACT_ACROSS_USERS_FULL
+01-3

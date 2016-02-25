@@ -1,49 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+    tools:showIn="@layout/activity_main"
+    tools:context=".MainActivity">
 
-    <TextView android:text="Hello World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/test_button_text"
-        android:onClick="MyOnClickMethod"
-        android:id="@+id/myButton"
-        />
-    <Button
-        android:text="Music Start"
-        android:id="@+id/PlayButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-    </Button>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/PlayButton"
-        android:layout_centerHorizontal="true" />
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton1"
+            android:background="@drawable/toggle_button1"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="0"
+            android:checked="false"
+            android:layout_margin="10dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timer"
-        android:id="@+id/TimerButton"
-        android:layout_above="@+id/PlayButton"
-        android:layout_centerHorizontal="true"
-        android:onClick="TimerOnClickMethod"/>
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton2"
+            android:background="@drawable/toggle_button2"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="1"
+            android:layout_margin="10dp" />
 
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton3"
+            android:background="@drawable/toggle_button3"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
 
-</RelativeLayout>
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton4"
+            android:background="@drawable/toggle_button4"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton5"
+            android:background="@drawable/toggle_button5"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="0"
+            android:checked="false"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton6"
+            android:background="@drawable/toggle_button6"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="1"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton7"
+            android:background="@drawable/toggle_button7"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+
+        <ToggleButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/toggleButton8"
+            android:background="@drawable/toggle_button8"
+            android:textOff=""
+            android:textOn=""
+            android:layout_column="2"
+            android:layout_margin="10dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+</TableLayout>
